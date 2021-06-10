@@ -7,10 +7,10 @@ $words = [
     'SUPERMAN',
     'this is not super',
     'batman',
-    'S U P E R M A n'
+    'S U P E R M A n',
 ];
 
-function is_superman(string $str)
+function isSuperman(string $str)
 {
     if (strpos(strtolower($str), 'superman') === false) {
         throw new Exception();
@@ -19,7 +19,7 @@ function is_superman(string $str)
 
 foreach ($words as $word) {
     try {
-        is_superman($word);
+        isSuperman($word);
     } catch (Exception $e) {
         echo "Word {$word} raised exception \n";
     }
