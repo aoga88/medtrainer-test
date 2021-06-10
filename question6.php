@@ -1,9 +1,11 @@
 <?php
 
+const INVALID_PHONE = 'Invalid Phone';
+
 function formatPhone($phone, $delimiter = '-')
 {
     if (empty($phone)) {
-        return $phone;
+        throw new Exception(INVALID_PHONE);
     }
 
     $cleanPhone = '';
@@ -13,16 +15,18 @@ function formatPhone($phone, $delimiter = '-')
     }
 
     if (strlen($cleanPhone) < 10) {
-        return $phone;
+        throw new Exception(INVALID_PHONE);
     }
 
     $formattedNumber = '';
-    for ($i = 9; $i >= 0; $i--) {
-        if ($i == 5 || $i == 2) {
+    for ($i = strlen($cleanPhone) - 1; $i >= 0; $i--) {
+        if (strlen($formattedNumber) == 4 || strlen($formattedNumber) == 8) {
             $formattedNumber = $delimiter . $formattedNumber;
         }
 
         $formattedNumber = $cleanPhone[$i] . $formattedNumber;
+
+        if (strlen($formattedNumber) == 12) break;
     }
 
     return $formattedNumber;
@@ -34,9 +38,16 @@ $testPhones = [
     '1234567890',
     '12345678901234567890',
     '',
-    '123'
+    '123',
+    '+11234567890',
+    '+521234567889'
 ];
 
 foreach ($testPhones as $testPhone) {
-    var_dump(formatPhone($testPhone));
+    try {
+        $formattedNumber = formatPhone($testPhone);
+        echo "{$testPhone} = {$formattedNumber}\n";
+    } catch (Exception $e) {
+        echo "{$testPhone} = Invalid format\n";
+    }
 }
