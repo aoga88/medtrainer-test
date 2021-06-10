@@ -1,0 +1,13 @@
+{
+    "name": "osvaldogarcia/medtrainer-test",
+    "description": "MedTrainer Test",
+    "require": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "authors": [
+        {
+            "name": "Osvaldo Garcia",
+            "email": "aoga88@gmail.com"
+        }
+    ]
+}
